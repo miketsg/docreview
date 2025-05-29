@@ -1,26 +1,11 @@
 import { useCallback, useState } from 'react';
-import { createEditor, Descendant, Text, NodeEntry, BaseText, BaseEditor } from 'slate';
-import { Slate, Editable, withReact, RenderLeafProps, ReactEditor } from 'slate-react';
+import { createEditor, Descendant, Text, NodeEntry, BaseEditor } from 'slate';
+import { Slate, Editable, withReact, RenderLeafProps, ReactEditor, RenderElementProps } from 'slate-react';
 import { withHistory, HistoryEditor } from 'slate-history';
-import * as Tooltip from '@radix-ui/react-tooltip';
 import contractData from '../../data/contract.json';
-
-interface Highlight {
-  id: number;
-  start: number;
-  end: number;
-  description: string;
-}
-
-interface CustomText extends BaseText {
-  start?: number;
-  end?: number;
-}
-
-type CustomElement = {
-  type: 'paragraph';
-  children: CustomText[];
-}
+import { HighlightTooltip } from './HighlightTooltip';
+import { EditorToolbar } from './EditorToolbar';
+import { Highlight, CustomText, CustomElement } from './types';
 
 declare module 'slate' {
   interface CustomTypes {
@@ -43,44 +28,55 @@ const LegalEditor = () => {
 
   const renderLeaf = useCallback(({ attributes, children, leaf }: RenderLeafProps) => {
     const highlight = contractData.highlights.find(
-      (h: Highlight) => 
-        'start' in leaf && 
-        'end' in leaf && 
-        leaf.start! >= h.start && 
+      (h: Highlight) =>
+        'start' in leaf &&
+        'end' in leaf &&
+        leaf.start! >= h.start &&
         leaf.end! <= h.end
     );
 
+    let element = <span {...attributes}>{children}</span>;
+
+    if (leaf.bold) {
+      element = <strong>{element}</strong>;
+    }
+    if (leaf.italic) {
+      element = <em>{element}</em>;
+    }
+    if (leaf.underline) {
+      element = <u>{element}</u>;
+    }
+
     if (highlight) {
       return (
-        <Tooltip.Provider delayDuration={0} skipDelayDuration={0}>
-          <Tooltip.Root>
-            <Tooltip.Trigger asChild>
-              <span
-                {...attributes}
-                style={{
-                  backgroundColor: 'rgba(255, 255, 0, 0.3)',
-                  cursor: 'pointer',
-                }}
-              >
-                {children}
-              </span>
-            </Tooltip.Trigger>
-            <Tooltip.Portal>
-              <Tooltip.Content
-                className="p-2 bg-white border border-gray-200 rounded shadow-lg"
-                sideOffset={5}
-                side="top"
-              >
-                {highlight.description}
-                <Tooltip.Arrow className="fill-white" />
-              </Tooltip.Content>
-            </Tooltip.Portal>
-          </Tooltip.Root>
-        </Tooltip.Provider>
+        <HighlightTooltip
+          attributes={attributes}
+          highlight={highlight}
+        >
+          {element}
+        </HighlightTooltip>
       );
     }
 
-    return <span {...attributes}>{children}</span>;
+    return element;
+  }, []);
+
+  const renderElement = useCallback(({ attributes, children, element }: RenderElementProps) => {
+    const style: React.CSSProperties = { textAlign: 'left' };
+    switch (element.type) {
+      case 'align-center':
+        style.textAlign = 'center';
+        break;
+      case 'align-right':
+        style.textAlign = 'right';
+        break;
+      case 'bulleted-list':
+        return <ul style={style} {...attributes}>{children}</ul>;
+      case 'numbered-list':
+        return <ol style={style} {...attributes}>{children}</ol>;
+      default:
+        return <p style={style} {...attributes}>{children}</p>;
+    }
   }, []);
 
   const decorate = useCallback(([node, path]: NodeEntry) => {
@@ -109,13 +105,17 @@ const LegalEditor = () => {
   return (
     <div className="max-w-4xl p-4 mx-auto">
       <Slate editor={editor} initialValue={value} onChange={setValue}>
-        <div className="border rounded-lg p-4 min-h-[500px] bg-white">
-          <Editable
-            renderLeaf={renderLeaf}
-            decorate={decorate}
-            placeholder="Enter your legal text..."
-            className="prose max-w-none"
-          />
+        <div className="border rounded-lg bg-white">
+          <EditorToolbar />
+          <div className="p-4 min-h-[500px]">
+            <Editable
+              renderLeaf={renderLeaf}
+              renderElement={renderElement}
+              decorate={decorate}
+              placeholder="Enter your legal text..."
+              className="prose max-w-none"
+            />
+          </div>
         </div>
       </Slate>
     </div>
