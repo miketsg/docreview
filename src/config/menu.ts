@@ -15,7 +15,7 @@ type MenuType = MenuItemType[]
 export const mainMenu: MenuType = [
     {
         title: 'Review',
-        url: '/',
+        url: '/review',
         icon: Files
     },
     {
