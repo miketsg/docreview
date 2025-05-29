@@ -1,0 +1,29 @@
+{
+  "content": "This Agreement (\"Agreement\") is made and entered into as of [Date] by and between [Company Name] (\"Company\") and [Employee Name] (\"Employee\").\n\n1. Employment. The Company agrees to employ the Employee, and the Employee agrees to be employed by the Company, upon the terms and conditions set forth in this Agreement.\n\n2. Term. The term of this Agreement shall commence on [Start Date] and shall continue until terminated by either party in accordance with the provisions of Section 4.\n\n3. Position and Duties. The Employee shall serve as [Position] and shall perform such duties as are customarily performed by a person in such position.\n\n4. Termination. This Agreement may be terminated by either party upon thirty (30) days' written notice to the other party.",
+  "highlights": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 15,
+      "description": "Consider adding a specific date instead of [Date] placeholder"
+    },
+    {
+      "id": 2,
+      "start": 16,
+      "end": 30,
+      "description": "Company name should be specified"
+    },
+    {
+      "id": 3,
+      "start": 31,
+      "end": 45,
+      "description": "Employee name should be specified"
+    },
+    {
+      "id": 4,
+      "start": 200,
+      "end": 220,
+      "description": "Consider adding specific job responsibilities"
+    }
+  ]
+} 
