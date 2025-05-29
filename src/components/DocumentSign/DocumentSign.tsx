@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
+import type { DraggableEvent, DraggableData } from 'react-draggable';
 import { Document, Page } from 'react-pdf';
 import { Button } from '../ui/button';
 
@@ -12,13 +13,12 @@ interface SignatureArea {
 }
 
 export default function DocumentSign() {
-  const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNum, setPageNum] = useState(1);
   const [signatureAreas, setSignatureAreas] = useState<SignatureArea[]>([]);
   const [scale, setScale] = useState(1.4);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
-    setNumPages(numPages);
+  const onDocumentLoadSuccess = () => {
     setPageNum(1);
   };
 
@@ -26,11 +26,11 @@ export default function DocumentSign() {
     const newId = `signature-${Date.now()}`;
     setSignatureAreas((prevAreas: SignatureArea[]) => [
       ...prevAreas,
-      { id: newId, x: 50, y: 50, width: 100, height: 50 },
+      { id: newId, x: 50, y: 50, width: 200, height: 100 },
     ]);
   };
 
-  const handleDrag = (id: string, ui: { x: number; y: number }) => {
+  const handleDrag = (id: string, e: DraggableEvent, ui: DraggableData) => {
     setSignatureAreas((prevAreas: SignatureArea[]) =>
       prevAreas.map((area: SignatureArea) =>
         area.id === id ? { ...area, x: ui.x, y: ui.y } : area
@@ -60,7 +60,7 @@ export default function DocumentSign() {
         </div>
       </div>
       <div className="border rounded-lg p-4 min-h-[500px] bg-white relative overflow-auto">
-        <div className="flex justify-center">
+        <div ref={containerRef} className="flex justify-center relative">
           <Document
             file="/src/data/sign.pdf"
             onLoadSuccess={onDocumentLoadSuccess}
@@ -73,31 +73,35 @@ export default function DocumentSign() {
               scale={scale}
             />
           </Document>
-        </div>
-        {signatureAreas.map((area: SignatureArea) => (
-          <Draggable
-            key={area.id}
-            bounds="parent"
-            defaultPosition={{ x: area.x, y: area.y }}
-            onStop={(_e: React.SyntheticEvent, ui: { x: number; y: number }) => handleDrag(area.id, ui)}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                border: '2px dashed blue',
-                width: area.width,
-                height: area.height,
-                cursor: 'grab',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(0, 0, 255, 0.1)',
-              }}
+          {signatureAreas.map((area: SignatureArea) => (
+            <Draggable
+              key={area.id}
+              nodeRef={containerRef}
+              bounds="parent"
+              position={{ x: area.x, y: area.y }}
+              onDrag={(e: DraggableEvent, ui: DraggableData) => handleDrag(area.id, e, ui)}
+              grid={[10, 10]}
             >
-              Signature Area
-            </div>
-          </Draggable>
-        ))}
+              <div
+                style={{
+                  position: 'absolute',
+                  border: '2px dashed blue',
+                  width: area.width,
+                  height: area.height,
+                  cursor: 'move',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                  userSelect: 'none',
+                  zIndex: 1000,
+                }}
+              >
+                Signature Area
+              </div>
+            </Draggable>
+          ))}
+        </div>
       </div>
     </div>
   );
