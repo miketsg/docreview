@@ -27,7 +27,7 @@ export const HighlightTooltip = ({ attributes, children, highlight }: HighlightT
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content
-            className="p-2 bg-white border border-gray-200 rounded shadow-lg"
+            className="p-2 bg-gray-50 border border-gray-200 rounded shadow-lg w-[1200px] whitespace-normal break-words "
             sideOffset={5}
             side="top"
           >
@@ -38,4 +38,4 @@ export const HighlightTooltip = ({ attributes, children, highlight }: HighlightT
       </Tooltip.Root>
     </Tooltip.Provider>
   );
-}; 
+};
