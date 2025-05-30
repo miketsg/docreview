@@ -8,7 +8,7 @@ export default function Review() {
                     <div className="max-w-4xl px-4 py-4 mx-auto">
                         <h1 className="text-2xl font-semibold text-gray-900">Review document</h1>
                         <p className="mt-1 text-sm text-gray-500">
-                            A rich text editor for legal documents with issue highlighting
+                            Identify issues and explore suggestions in your legal document
                         </p>
                     </div>
                 </header>
