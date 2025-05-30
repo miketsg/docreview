@@ -36,7 +36,7 @@ export const HighlightTooltip = ({
             side="top"
           >
             <div className="space-y-2">
-              <p>{highlight.description}</p>
+              <div dangerouslySetInnerHTML={{ __html: highlight.description }}></div>
               <div className="flex justify-end gap-2 mt-2">
                 <button
                   type="button"

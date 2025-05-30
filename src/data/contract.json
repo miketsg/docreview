@@ -1,29 +1,26 @@
 {
-  "content": "This Agreement (\"Agreement\") is made and entered into as of [Date] by and between [Company Name] (\"Company\") and [Employee Name] (\"Employee\").\n\n1. Employment. The Company agrees to employ the Employee, and the Employee agrees to be employed by the Company, upon the terms and conditions set forth in this Agreement.\n\n2. Term. The term of this Agreement shall commence on [Start Date] and shall continue until terminated by either party in accordance with the provisions of Section 4.\n\n3. Position and Duties. The Employee shall serve as [Position] and shall perform such duties as are customarily performed by a person in such position.\n\n4. Termination. This Agreement may be terminated by either party upon thirty (30) days' written notice to the other party.",
+  "content": "This Purchase and Sale Agreement (\"Agreement\") is made and entered into as of October 26, 2023 (\"Effective Date\"), by and between Innovatech Solutions Ltd. (\"Seller\"), a Delaware corporation with its principal place of business at 123 Tech Drive, Silicon Valley, CA 94000, and Global Procurement Inc. (\"Buyer\"), a New York corporation with its principal place of business at 456 Commerce St, New York, NY 10001.\n\n1.  **Goods and Quantity.** Seller agrees to sell and Buyer agrees to purchase One Thousand (1,000) units of \"Advanced AI Processing Unit - Model Z\" (the \"Goods\"), as detailed in Specification Sheet A, which is attached hereto as Exhibit A and incorporated by reference. Minor variations in specifications not affecting performance are permissible by Seller.\n\n2.  **Purchase Price and Payment Terms.** The total purchase price for the Goods shall be Five Hundred Thousand U.S. Dollars ($500,000.00) (the \"Purchase Price\"). Buyer shall pay the full Purchase Price within thirty (30) days of the Effective Date via wire transfer. Late payments will incur a penalty of 1.5% per month on the outstanding balance.\n\n3.  **Delivery and Title Transfer.** Seller shall deliver the Goods DDP (Delivered Duty Paid) to Buyer's warehouse at 789 Distribution Way, Edison, NJ 08837, within sixty (60) days from the Effective Date. Title to the Goods and risk of loss shall pass to Buyer upon delivery to Buyer's warehouse. Seller is responsible for all shipping and insurance costs until delivery.\n\n4.  **Inspection, Acceptance, and Returns.** Buyer shall have seven (7) calendar days from the date of delivery to inspect the Goods for defects or non-conformities (the \"Inspection Period\"). Buyer must notify Seller in writing of any such issues within this period. If no notification is received, Goods are deemed accepted. For validly rejected Goods, Seller's sole obligation is to replace the non-conforming Goods within a reasonable time. No returns are permitted for any other reason.\n\n5.  **Warranty and Limitation of Liability.** Seller warrants the Goods against defects in materials and workmanship for a period of one (1) year from the date of delivery, provided they are used under normal conditions. THIS WARRANTY IS EXCLUSIVE. All other warranties, express or implied, including warranties of merchantability and fitness for a particular purpose, are hereby disclaimed. Seller’s maximum liability for any claim arising from this Agreement shall not exceed the Purchase Price. Seller shall not be liable for any lost profits or consequential damages.",
   "highlights": [
     {
       "id": 1,
-      "start": 0,
-      "end": 15,
-      "description": "Consider adding a specific date instead of [Date] placeholder"
+      "start": 684,
+      "end": 770,
+      "description": "This clause is subjective and could lead to disputes. <span class='font-bold'>Minor variations</span> and <span class='font-bold'>not affecting performance</span> are not clearly defined, giving Seller too much discretion. Buyer might receive goods that technically meet core specs but differ in ways Buyer deems significant."
     },
     {
       "id": 2,
-      "start": 16,
-      "end": 30,
-      "description": "Company name should be specified"
+      "start": 936,
+      "end": 1040,
+      "description": "Requiring full payment within 30 days of the Effective Date, potentially *before* the Goods are manufactured or delivered (delivery is within 60 days), poses a significant cash flow and risk burden on the Buyer. Buyer pays in full before seeing or receiving the goods."
     },
+
     {
       "id": 3,
-      "start": 31,
-      "end": 45,
-      "description": "Employee name should be specified"
-    },
-    {
-      "id": 4,
-      "start": 200,
-      "end": 220,
-      "description": "Consider adding specific job responsibilities"
+      "start": 1542,
+      "end": 1822,
+      "description": "Seven calendar days is a short period for inspecting 1,000 advanced units, especially if 'defects or non-conformities' are not immediately obvious. The 'deemed accepted' clause is strict and could waive Buyer's rights for latent defects."
     }
+
+
   ]
-} 
+}
