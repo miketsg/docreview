@@ -53,7 +53,7 @@ export default function DocumentSign() {
       <div className="border rounded-lg p-4 min-h-[500px] bg-white relative overflow-auto">
         <div ref={containerRef} className="flex justify-center relative">
           <DocumentViewer
-            file="/src/data/sign.pdf"
+            file="data/sign.pdf"
             pageNumber={pageNum}
             scale={scale}
             onLoadSuccess={onDocumentLoadSuccess}
