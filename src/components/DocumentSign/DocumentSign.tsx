@@ -46,8 +46,8 @@ export default function DocumentSign() {
     <div className="max-w-4xl p-4 mx-auto">
       <div className="flex justify-between mb-4">
         <div className="flex gap-2">
-          <Button onClick={addSignatureArea}>Add Signature Area</Button>
-          <Button onClick={saveSignatureCoordinates}>Log Coordinates</Button>
+          <Button onClick={addSignatureArea} className="hover:cursor-pointer">Add Signature Area</Button>
+          <Button onClick={saveSignatureCoordinates} className="hover:cursor-pointer">Log Coordinates</Button>
         </div>
       </div>
       <div className="border rounded-lg p-4 min-h-[500px] bg-white relative overflow-auto">
